@@ -52,18 +52,18 @@ export class CircularSliderInputComponent implements OnInit, ControlValueAccesso
     );
   }
 
-  writeValue(value : TSliderControlsValue) {
+  writeValue(value : TSliderControlsValue) : void {
    this.sliderControlsValue = value
    this.setSliderHandles();
   }
 
-  registerOnChange(fn : any) {
+  registerOnChange(fn : any) : void {
     this.propagateChange = fn;
   }
 
   propagateChange = (_: any) => {};
 
-  registerOnTouched() {}
+  registerOnTouched() : void {}
  
   ngOnDestroy() : void {
     this.subList.forEach(sub => sub.unsubscribe());
@@ -81,7 +81,7 @@ export class CircularSliderInputComponent implements OnInit, ControlValueAccesso
       width: 24,
       value: `${this.sliderControlsValue.min},${this.sliderControlsValue.max}`,
       circleShape: "pie",
-      startAngle: 313,
+      startAngle: 315,
       lineCap: "round",
       editableTooltip: false,
       min: this.range.minRange,

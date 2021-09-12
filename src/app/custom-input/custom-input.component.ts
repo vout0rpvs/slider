@@ -3,7 +3,18 @@ import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 
 @Component({
   selector: 'custom-input',
-  templateUrl: './custom-input.component.html',
+  template: `
+    <div class="input-container" tabindex="1">
+        <input
+          #input
+          type="text" 
+          name="input" 
+          (input)="onChange($event)"
+          [value]="value" 
+        >
+        <label for="input">{{title}}</label>
+    </div>
+  `,
   styleUrls: ['./custom-input.component.scss'],
   providers: [
     { 
