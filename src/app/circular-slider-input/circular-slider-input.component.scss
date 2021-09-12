@@ -1,0 +1,31 @@
+figure {
+    overflow: hidden;
+    ::ng-deep {
+        .rs-control .rs-range-color {
+            background-color: #f3821e;
+        }
+        .rs-control .rs-path-color {
+            background-color: #f2f2f2;
+        }
+
+        .rs-control .rs-handle {
+            position: relative;
+            background-color: #ffffff;
+            border: 2px solid #f3821e;
+            border-radius: 50%;
+        }
+        .rs-control .rs-bg-color {
+            background-color: white;
+        }
+        .rs-tooltip, .rs-tooltip-text {
+            /* 12-70 */
+
+        font-family: 'M PLUS Rounded 1c', sans-serif;;
+        font-style: normal;
+        font-weight: 800;
+        font-size: 32px;
+        word-spacing: -12px;
+        line-height: 48px;
+        }
+    }
+}
