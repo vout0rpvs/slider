@@ -1,45 +1,37 @@
 import { Component } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { combineLatest, iif, merge, Observable, of, Subject, Subscription } from 'rxjs';
-import { filter, map, mergeMap, switchMap, tap } from 'rxjs/operators';
-import { TSliderAvailableRange } from './circular-slider-input/circular-slider-input.component';
-import { SliderService } from './circular-slider-input/slider.service';
-
+import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
+import { Subscription } from 'rxjs';
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
-  public reactiveForm : FormGroup;
+  public sliderControl : FormControl;
+  public sliderReactiveForm : FormGroup;
   private subList : Subscription[] = [];
 
-  constructor(private fb: FormBuilder,
-              private sliderService: SliderService) {}
+  constructor(private fb: FormBuilder) {}
 
   ngOnInit() {
-    this.reactiveForm = this.fb.group({
-      rangeSelection: {minSelected: 10, maxSelected: 30},
-      minRange: null,
-      maxRange: null
+    this.sliderControl = this.fb.control({
+      min: 10, 
+      max: 30
+    })
+    this.sliderReactiveForm = this.fb.group({
+      min: 0,
+      max: 100
     })
 
-    this.subList.push(this.getAvailableRange()
-      .subscribe(result => this.sliderService.addToRangeStore(result)));
-  }
+    this.subList.push(
+      this.sliderReactiveForm.valueChanges
+      .subscribe(({min, max}) => this.sliderControl.setValue({min, max})),
 
-  private getAvailableRange() : Observable<TSliderAvailableRange> {
-    return combineLatest([
-      this.reactiveForm.get('minRange').valueChanges, 
-      this.reactiveForm.get('maxRange').valueChanges
-    ])
-    .pipe(
-      switchMap(result => 
-        iif(() => 
-          result[0] < result[1], 
-          of({minRange: result[0], maxRange: result[1]}))
-        )
-      )
+      this.sliderControl.valueChanges
+      .subscribe(({min, max}) => {
+        this.sliderReactiveForm.setValue({min, max}, {emitEvent: false})
+      })
+    );
   }
 
   ngOnDestroy() : void {

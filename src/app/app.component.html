@@ -1,8 +1,8 @@
-<form [formGroup]="reactiveForm">
-    <circular-slider-input formControlName="rangeSelection"></circular-slider-input>
+<form [formGroup]="sliderReactiveForm">
+    <circular-slider-input [formControl]="sliderControl"></circular-slider-input>
     <section class="input-block">
-      <custom-input formControlName="minRange" title="Min Range"></custom-input>
+      <custom-input formControlName="min" title="Minimum"></custom-input>
       <strong>-</strong>
-      <custom-input formControlName="maxRange" title="Max Range"></custom-input>
+      <custom-input formControlName="max" title="Maximum"></custom-input>
     </section>
 </form>

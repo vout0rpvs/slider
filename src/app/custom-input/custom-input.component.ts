@@ -1,4 +1,4 @@
-import { Component, forwardRef, Input, OnInit } from '@angular/core';
+import { Component, ElementRef, forwardRef, Input, OnInit, ViewChild } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 
 @Component({
@@ -16,13 +16,21 @@ import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 export class CustomInputComponent implements ControlValueAccessor {
   @Input() title : string;
   @Input() value : number;
-  constructor() { }
+  @ViewChild('input') inputEl : ElementRef<HTMLInputElement>
+
   writeValue(value : number): void {
     this.value = value;
   }
 
   onChange(event : any) : void {
-    this.propagateChange(event.target.value)
+    
+    if(event.target.value >= 100) {
+      this.value = 100;
+      this.inputEl.nativeElement.value = `${this.value}`;
+    } else {
+      this.value = event.target.value;
+    }
+    this.propagateChange(this.value)
   }
 
   registerOnChange(fn: any): void {
