@@ -13,24 +13,19 @@ export class AppComponent {
 
   constructor(private fb: FormBuilder) {}
 
-  ngOnInit() {
-    this.sliderControl = this.fb.control({
-      min: 10, 
-      max: 30
-    })
-    this.sliderReactiveForm = this.fb.group({
-      min: 0,
-      max: 100
-    })
+  ngOnInit() : void {
+    const defaultValue = {min: 10, max: 30};
+    this.sliderControl = this.fb.control(defaultValue);
+    this.sliderReactiveForm = this.fb.group(defaultValue)
 
     this.subList.push(
       this.sliderReactiveForm.valueChanges
-      .subscribe(({min, max}) => this.sliderControl.setValue({min, max})),
+      .subscribe(({min, max}) => 
+        this.sliderControl.setValue({min, max})),
 
       this.sliderControl.valueChanges
-      .subscribe(({min, max}) => {
-        this.sliderReactiveForm.setValue({min, max}, {emitEvent: false})
-      })
+      .subscribe(({min, max}) => 
+        this.sliderReactiveForm.setValue({min, max}, {emitEvent: false}))
     );
   }
 
