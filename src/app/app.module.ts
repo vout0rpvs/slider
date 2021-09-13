@@ -6,12 +6,14 @@ import { CircularSliderInputComponent } from './circular-slider-input/circular-s
 import { NgxSliderModule } from '@angular-slider/ngx-slider';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { CustomInputComponent } from './custom-input/custom-input.component';
+import { SliderLabelsComponent } from './circular-slider-input/slider-labels/slider-labels.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     CircularSliderInputComponent,
-    CustomInputComponent
+    CustomInputComponent,
+    SliderLabelsComponent
   ],
   imports: [
     BrowserModule,

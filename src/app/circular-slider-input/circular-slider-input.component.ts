@@ -4,18 +4,13 @@ import { Subject, Subscription } from 'rxjs';
 import { map } from 'rxjs/operators'
 
 export type TSliderControlsValue = {min : number, max: number};
-export type TSliderAvailableRange = {minRange : number, maxRange : number}
 
 @Component({
   selector: 'circular-slider-input',
   template: `
     <figure class="slider-container">
         <div id="slider"></div>
-        <label class="quart quart1">{{range.minRange}}</label>
-        <label class="quart quart2">{{range.maxRange * .25}}</label>
-        <label class="quart quart3">{{range.maxRange * .50}}</label>
-        <label class="quart quart4">{{range.maxRange * .75}}</label>
-        <label class="quart quart5">{{range.maxRange}}</label>
+        <slider-labels [labels]="rangeLabels"></slider-labels>
     </figure>
   `,  
   styleUrls: ['./circular-slider-input.component.scss'],
@@ -31,7 +26,7 @@ export type TSliderAvailableRange = {minRange : number, maxRange : number}
 export class CircularSliderInputComponent implements OnInit, ControlValueAccessor {
   @Input() sliderControlsValue : TSliderControlsValue = {min : 0, max: 0};
 
-  public range: TSliderAvailableRange = {minRange: 0, maxRange: 100};
+  public rangeLabels : Array<number> = [0, 25, 50, 75, 100];
   private slider : any;
   private handleChangesSubject$ : Subject<string> = new Subject();
   private subList : Subscription[] = [];
@@ -84,8 +79,8 @@ export class CircularSliderInputComponent implements OnInit, ControlValueAccesso
       startAngle: 315,
       lineCap: "round",
       editableTooltip: false,
-      min: this.range.minRange,
-      max: this.range.maxRange,
+      min: 0,
+      max: 100,
       
       change: ({value} : {value : string}) => this.handleChangesSubject$.next(value)
     });

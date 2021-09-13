@@ -1,5 +1,6 @@
 figure {
     position: relative;
+    margin-bottom: 30px;
     ::ng-deep {
         .rs-control .rs-range-color {
             background-color: #f3821e;
@@ -25,37 +26,6 @@ figure {
             word-spacing: -12px;
             line-height: 48px;
         }
-
-        .rs-overlay {
-            display: none;
-        }
     }
 
-    .quart {
-        position: absolute;
-        font-family: 'M PLUS Rounded 1c', sans-serif;
-        color: #B6B6B6;
-        z-index: 5;
-        font-size: 18px;
-    }
-    .quart1 {
-        left:0;
-        bottom: 0
-    }
-    .quart2 {
-        left: -30px;
-        top: 50px;
-    }
-    .quart3 {
-        top: -40px;
-        left: 45%;
-    }
-    .quart4 {
-        right: -30px;
-        top: 50px;
-    }
-    .quart5 {
-        right:0;
-        bottom: 0
-    }
 }
